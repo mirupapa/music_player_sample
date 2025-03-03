@@ -8,5 +8,11 @@
         "nodeVersion": "20.x"
       }
     }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)/?$",
+      "dest": "/$1.html"
+    }
   ]
 } 
