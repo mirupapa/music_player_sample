@@ -6,6 +6,7 @@
 		"dev": "vite dev",
 		"build": "prisma generate && vite build",
 		"preview": "vite preview",
+		"vercel-build": "prisma generate && vite build",
 		"test:init": "DATABASE_URL=file:./test.db prisma db push",
 		"test": "bun test:init && DATABASE_URL=file:./test.db vitest run",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
