@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "prisma generate && vite build",
 		"preview": "vite preview",
 		"test:init": "DATABASE_URL=file:./test.db prisma db push",
 		"test": "bun test:init && DATABASE_URL=file:./test.db vitest run",
