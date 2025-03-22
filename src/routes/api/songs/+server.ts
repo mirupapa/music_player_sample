@@ -1,5 +1,6 @@
-import { json } from '@sveltejs/kit';
+import { json, type RequestEvent } from '@sveltejs/kit';
 import { listSong } from '$lib/server/listSong';
+import { addSong } from '$lib/server/addSong.js';
 
 export async function GET({ url }) {
   const ids = url.searchParams.get('ids');
@@ -25,7 +26,22 @@ export async function GET({ url }) {
 
    const songs = await listSong(params); 
 
-  console.log(songs);
-
   return json(songs, { status: 200 });
+}
+
+
+export async function POST({ request }: RequestEvent) {
+  try {
+    const formData = await request.formData();
+    const title = formData.get('title') as string;
+    const artistId = parseInt(formData.get('artistId') as string);
+    const audio = formData.get('audio') as File;
+    const image = formData.get('image') as File;
+
+    const song = await addSong(title, artistId, audio, image);
+    return json(song);
+  } catch (error) {
+    console.error(error);
+    return new Response('Failed to create song', { status: 500 });
+  }
 }
